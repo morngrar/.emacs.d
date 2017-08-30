@@ -1,2 +1,9 @@
 # Ignore backup files
 *~
+auto-save-list/
+
+# Ignore downloaded packages. Emacs downloads them from init.el
+elpa/
+
+# Also ignore this oddball
+recentf
