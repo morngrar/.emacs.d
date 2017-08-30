@@ -25,6 +25,17 @@
   )
 
 
+;; Ido-mode --- Better pattern matching/ completions
+;; Especially for listing open buffers
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
+
+; Also, use ibuffer instead of regular bufferlist
+(defalias 'list-buffers 'ibuffer)
+;; (defalias 'list-buffers 'ibuffer-other-window)
+
+
 ;; Org-mode
 (use-package org-bullets
   :ensure t
