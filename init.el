@@ -82,6 +82,18 @@
     (global-auto-complete-mode t)
     ))
 
+;; Prettyfying things
+;(use-package zenburn-theme
+;  :ensure t
+;  :config
+;  (load-theme 'zenburn t)
+;  )
+
+(use-package color-theme
+  :ensure t
+  :config
+  (load-theme 'tango)
+  )
 
 ;; Org-mode
 (use-package org-bullets
