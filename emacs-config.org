@@ -105,7 +105,6 @@
 
 
 * Cosmetics
-
 ** Theme
    I'm still not fully sold on what theme to use, so the code for
    zenburn is still in here, though commented out. One can explore the
@@ -136,8 +135,16 @@
        (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
        )
    #+END_SRC
+   
+
+* Org-mode specifics
+** Change org-mode python variable
+   Sets Org-mode python command to python3.
+
+   #+BEGIN_SRC emacs-lisp
+     (setq org-babel-python-command "python3")
+   #+END_SRC
 
 
 
-  
 
