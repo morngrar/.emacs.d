@@ -8,3 +8,4 @@ elpa/
 # individual files
 recentf
 ac-comphist.dat
+emacs-config.el
