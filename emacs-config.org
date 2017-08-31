@@ -105,6 +105,7 @@
 
 
 * Cosmetics
+
 ** Theme
    I'm still not fully sold on what theme to use, so the code for
    zenburn is still in here, though commented out. One can explore the
@@ -127,11 +128,16 @@
 
 ** Org-mode bullets
    Adds the nice bullets to org mode
+
    #+BEGIN_SRC emacs-lisp
      (use-package org-bullets
        :ensure t
        :config
-       (add-hook 'org-mode-hoo (lambda () (org-bullets-mode 1)))
+       (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
        )
    #+END_SRC
+
+
+
+  
 
