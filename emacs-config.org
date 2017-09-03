@@ -1,7 +1,7 @@
 
 #+STARTUP: overview
 * Fix the interface
-** Removing startup message and Bars
+** Removing startup message and cleaning top of window
    #+BEGIN_SRC emacs-lisp
      (setq inhibit-startup-screen t)
      (if (fboundp 'tool-bar-mode)
@@ -63,6 +63,22 @@
        )
    #+END_SRC
 
+** Feedback
+   Tell when end of buffer is reached:
+   #+BEGIN_SRC emacs-lisp
+     (setq-default indicate-empty-lines t)
+   #+END_SRC
+
+   Whitespace awareness:
+   #+BEGIN_SRC emacs-lisp
+     (setq whitespace-style
+           '(face trailing tabs indentation::space tab-mark)
+           )
+     (global-whitespace-mode)
+   #+END_SRC
+
+   #+RESULTS:
+   : t
 
 * Packages for trying new things
 ** Try
