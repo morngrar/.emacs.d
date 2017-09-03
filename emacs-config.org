@@ -1,11 +1,28 @@
 #+STARTUP: overview
 * Fix the interface
-#+BEGIN_SRC emacs-lisp
-(setq inhibit-startup-message t)
-(tool-bar-mode -1)
-(fset 'yes-or-no-p 'y-or-n-p)
-(global-set-key (kbd "<f5>") 'revert-buffer)
-#+END_SRC
+** Removing startup message and toolbar
+   #+BEGIN_SRC emacs-lisp
+     (setq inhibit-startup-message t)
+     (tool-bar-mode -1)
+   #+END_SRC
+
+** Tweaking general keybindings
+   Only stuff related to the interface goes here, not tied up to
+   specific modes or packages.
+
+*** 'y or n' prompts
+    Don't ask for whole words, only the letter.
+    
+    #+BEGIN_SRC emacs-lisp
+      (fset 'yes-or-no-p 'y-or-n-p)
+    #+END_SRC
+
+*** F5 'reload'
+    Revert buffer on F5 (reloads buffer from file)
+
+    #+BEGIN_SRC emacs-lisp
+      (global-set-key (kbd "<f5>") 'revert-buffer)
+    #+END_SRC
 
 
 * Packages for trying new things
