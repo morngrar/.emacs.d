@@ -1,3 +1,4 @@
+
 #+STARTUP: overview
 * Fix the interface
 ** Removing startup message and toolbar
@@ -23,6 +24,34 @@
     #+BEGIN_SRC emacs-lisp
       (global-set-key (kbd "<f5>") 'revert-buffer)
     #+END_SRC
+
+** Line wrapping and highlighting
+   Soft-wrapping of lines:
+
+   #+BEGIN_SRC emacs-lisp
+     (global-visual-line-mode 1)
+   #+END_SRC
+
+   Highlight current line:
+
+   #+BEGIN_SRC emacs-lisp
+     (global-hl-line-mode 1)
+   #+END_SRC
+
+   Set line-highlighting color to differ from the themes C-<space>
+   color:
+
+   #+BEGIN_SRC emacs-lisp
+     (set-face-background hl-line-face "#d2dff6")
+   #+END_SRC
+
+** Tweaking edges
+   Removing fringes:
+   
+   #+BEGIN_SRC emacs-lisp
+     (set-fringe-mode '(0 . 0))
+   #+END_SRC
+
 
 
 * Packages for trying new things
