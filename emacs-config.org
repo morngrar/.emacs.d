@@ -77,8 +77,6 @@
      (global-whitespace-mode)
    #+END_SRC
 
-   #+RESULTS:
-   : t
 
 * Packages for trying new things
 ** Try
@@ -201,8 +199,6 @@
 
 * Python editing
 ** Execution from within emacs
-
-
    This sets the version of python to use for the keybinding C-c C-c:
    #+BEGIN_SRC emacs-lisp
      (setq python-python-command "python3")
@@ -240,7 +236,7 @@
        (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
        )
    #+END_SRC
-   
+
 
 * Org-mode specifics
 ** Change org-mode python variable
