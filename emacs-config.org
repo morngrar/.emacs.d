@@ -18,7 +18,7 @@
 
 *** 'y or n' prompts
     Don't ask for whole words, only the letter.
-    
+
     #+BEGIN_SRC emacs-lisp
       (fset 'yes-or-no-p 'y-or-n-p)
     #+END_SRC
@@ -47,11 +47,11 @@
    color:
 
    #+BEGIN_SRC emacs-lisp
-     (set-face-background hl-line-face "#d2dff6") 
+     (set-face-background hl-line-face "#d2dff6")
    #+END_SRC
 
 ** Tweaking edges
-   Removing fringes:   
+   Removing fringes:
    #+BEGIN_SRC emacs-lisp
      (set-fringe-mode '(0 . 0))
    #+END_SRC
@@ -75,6 +75,7 @@
            '(face trailing tabs indentation::space tab-mark)
            )
      (global-whitespace-mode)
+     (diminish 'global-whitespace-mode) ;; not exactly sure what this does..
    #+END_SRC
 
 
