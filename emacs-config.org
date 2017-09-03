@@ -42,16 +42,22 @@
    color:
 
    #+BEGIN_SRC emacs-lisp
-     (set-face-background hl-line-face "#d2dff6")
+     (set-face-background hl-line-face "#d2dff6") 
    #+END_SRC
 
 ** Tweaking edges
-   Removing fringes:
-   
+   Removing fringes:   
    #+BEGIN_SRC emacs-lisp
      (set-fringe-mode '(0 . 0))
    #+END_SRC
 
+   Removing scrollbars:
+   #+BEGIN_SRC emacs-lisp
+     (if
+         (fboundp 'scroll-bar-mode)
+         (scroll-bar-mode -1)
+       )
+   #+END_SRC
 
 
 * Packages for trying new things
