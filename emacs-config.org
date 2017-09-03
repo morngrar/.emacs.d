@@ -196,6 +196,17 @@
         (global-flycheck-mode t ))
     #+END_SRC
 
+** No tabs!
+   Don't use tabs for indentation:
+   #+BEGIN_SRC emacs-lisp
+     (setq-default indent-tabs-mode nil)
+   #+END_SRC
+
+   Set tab-width to 4:
+   #+BEGIN_SRC emacs-lisp
+     (setq tab-width 4)
+   #+END_SRC
+
 
 * Python editing
 ** Execution from within emacs
