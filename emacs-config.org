@@ -1,10 +1,15 @@
 
 #+STARTUP: overview
 * Fix the interface
-** Removing startup message and toolbar
+** Removing startup message and Bars
    #+BEGIN_SRC emacs-lisp
-     (setq inhibit-startup-message t)
-     (tool-bar-mode -1)
+     (setq inhibit-startup-screen t)
+     (if (fboundp 'tool-bar-mode)
+         (tool-bar-mode -1)
+       )
+     (if (fboundp 'menu-bar-mode)
+         (menu-bar-mode -1)
+       )
    #+END_SRC
 
 ** Tweaking general keybindings
@@ -53,8 +58,7 @@
 
    Removing scrollbars:
    #+BEGIN_SRC emacs-lisp
-     (if
-         (fboundp 'scroll-bar-mode)
+     (if (fboundp 'scroll-bar-mode)
          (scroll-bar-mode -1)
        )
    #+END_SRC
