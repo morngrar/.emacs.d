@@ -5,6 +5,9 @@ auto-save-list/
 # Ignore downloaded packages. Emacs downloads them from init.el
 elpa/
 
+# Ignore testing folder
+testing/
+
 # individual files
 recentf
 ac-comphist.dat

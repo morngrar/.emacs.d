@@ -88,7 +88,7 @@
 
 
 * General editing
-** Auto-comletion
+** Auto-completion
    Later this will probably be extended, but for now, the package
    auto-complete is basically it.
 
@@ -102,6 +102,32 @@
           (global-auto-complete-mode t)
           ))
     #+END_SRC
+
+** Spell-and syntax checking
+
+*** flycheck
+    This package does on the fly syntax checking for MANY programming
+    languages. It uses external tools like gcc for C/C++ and
+    python-pylint for python.
+
+    For python 3, do: pip3 install pylint, and it should work nicely.
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package flycheck
+        :ensure t
+        :init
+        (global-flycheck-mode t ))
+    #+END_SRC
+
+
+* Python editing
+** Execution from within emacs
+
+
+   This sets the version of python to use for the keybinding C-c C-c:
+   #+BEGIN_SRC emacs-lisp
+     (setq python-python-command "python3")
+   #+END_SRC
 
 
 * Cosmetics
