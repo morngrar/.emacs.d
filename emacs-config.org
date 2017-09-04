@@ -217,6 +217,7 @@
      (setq python-shell-interpreter "python3")
    #+END_SRC
 
+   The shell is opened with C-c C-z.
 
 * Cosmetics
 ** Theme
