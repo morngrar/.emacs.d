@@ -78,7 +78,6 @@
      (diminish 'global-whitespace-mode) ;; not exactly sure what this does..
    #+END_SRC
 
-
 * Packages for trying new things
 ** Try
    #+BEGIN_SRC emacs-lisp
@@ -94,7 +93,6 @@
        (which-key-mode)
      )
    #+END_SRC
-
 
 * Tweaking buffer and window management
 ** ibuffer
@@ -119,7 +117,6 @@
            ((t (:inherit ace-jump-face-foreground :height 3.0)))))
         ))
    #+END_SRC
-
 
 * Better searching and file finding
 ** counsel
@@ -156,7 +153,6 @@
          (setq ivy-use-virtual-buffers t)
          (setq enable-recursive-minibuffers t) ))
    #+END_SRC
-
 
 * General editing
 ** Auto-completion
@@ -208,7 +204,6 @@
      (setq tab-width 4)
    #+END_SRC
 
-
 * Python editing
 ** Execution from within emacs
    This sets the version of python to use for the keybinding C-c C-c:
@@ -218,6 +213,16 @@
    #+END_SRC
 
    The shell is opened with C-c C-z.
+
+** Completion
+*** jedi
+    #+BEGIN_SRC emacs-lisp
+      (use-package jedi
+        :ensure t
+        :init
+        (add-hook 'python-mode-hook 'jedi:setup)
+        (add-hook 'python-mode-hook 'jedi:ac-setup))
+    #+END_SRC
 
 * Cosmetics
 ** Theme
@@ -250,7 +255,6 @@
        (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
        )
    #+END_SRC
-
 
 * Org-mode specifics
 ** Change org-mode python variable
