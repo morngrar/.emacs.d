@@ -75,7 +75,7 @@
            '(face trailing tabs indentation::space tab-mark)
            )
      (global-whitespace-mode)
-     (diminish 'global-whitespace-mode) ;; not exactly sure what this does..
+     ;(diminish 'global-whitespace-mode) ;; not exactly sure what this does..
    #+END_SRC
 
 * Packages for trying new things
@@ -238,11 +238,14 @@
      ;  (load-theme 'zenburn t)
      ;  )
 
-     (use-package color-theme
-       :ensure t
-       :config
-       (load-theme 'tango)
-       )
+;     (use-package color-theme
+;       :ensure t
+;       :config
+;       (load-theme 'tango-plus t)
+;       )
+
+     (load-theme 'tango-plus t)
+
    #+END_SRC
 
 ** Org-mode bullets
