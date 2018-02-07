@@ -4,6 +4,7 @@ auto-save-list/
 
 # Ignore downloaded packages. Emacs downloads them from init.el
 elpa/
+anaconda-mode/
 
 # Ignore testing folder
 testing/
