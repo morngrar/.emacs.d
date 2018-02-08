@@ -319,7 +319,6 @@
 
 * GIT integration
 ** Magit
-   You may have to install magit separately.
 
    Make sure magit is installed:
    #+BEGIN_SRC emacs-lisp
