@@ -187,19 +187,12 @@
 
 * General editing
 ** Auto-completion
-   Later this will probably be extended, but for now, the package
-   auto-complete is basically it.
 
-*** auto-complete
+*** Company
+    Required by backends for c++ and python.
     #+BEGIN_SRC emacs-lisp
-;      (use-package auto-complete
-;
-;        :ensure t
-;        :init
-;        (progn
-;          (ac-config-default)
-;          (global-auto-complete-mode t)
-;          ))
+      (use-package company
+        :ensure t)
     #+END_SRC
 
 *** electric-pair-mode
@@ -248,15 +241,13 @@
    The shell is opened with C-c C-z.
 
 ** Completion
-*** Make sure company and company-anaconda are installed:
+
+   Make sure company-anaconda are installed:
     #+BEGIN_SRC emacs-lisp
-      (use-package company
-        :ensure t)
       (use-package company-anaconda
         :ensure t)
     #+END_SRC
 
-*** company-anaconda
     This initializes company,
     #+BEGIN_SRC emacs-lisp
       (add-hook 'after-init-hook 'global-company-mode)
