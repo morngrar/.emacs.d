@@ -2,6 +2,9 @@
 *~
 auto-save-list/
 
+# Session files
+session.*
+
 # Ignore downloaded packages. Emacs downloads them from init.el
 elpa/
 anaconda-mode/
