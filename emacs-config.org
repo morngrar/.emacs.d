@@ -15,6 +15,18 @@
    Only stuff related to the interface goes here, not tied up to
    specific modes or packages.
 
+*** Shell integration
+
+    Interactive shell command - may be limited
+    #+BEGIN_SRC emacs-lisp
+      (global-set-key (kbd "M-s") 'shell)
+    #+END_SRC
+
+    Spawn full bash in the buffer (no limitations):
+    #+BEGIN_SRC emacs-lisp
+      (global-set-key (kbd "C-M-s") 'term)
+    #+END_SRC
+
 *** 'y or n' prompts
     Don't ask for whole words, only the letter.
 
@@ -28,7 +40,6 @@
     #+BEGIN_SRC emacs-lisp
       (global-set-key (kbd "<f5>") 'revert-buffer)
     #+END_SRC
-
 
 ** Line wrapping and highlighting
    Soft-wrapping of lines:
@@ -305,7 +316,6 @@
    #+BEGIN_SRC emacs-lisp
      (setq org-babel-python-command "python3")
    #+END_SRC
-
 
 * GIT integration
 ** Magit
