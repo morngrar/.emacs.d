@@ -29,6 +29,7 @@
       (global-set-key (kbd "<f5>") 'revert-buffer)
     #+END_SRC
 
+
 ** Line wrapping and highlighting
    Soft-wrapping of lines:
 
@@ -298,4 +299,23 @@
    #+END_SRC
 
 
+* GIT integration
+** Magit
+   You may have to install magit separately.
+
+   Make sure magit is installed:
+   #+BEGIN_SRC emacs-lisp
+     (use-package 'magit
+       :ensure t)
+   #+END_SRC
+
+   This binds magit-status to C-x g
+   #+BEGIN_SRC emacs-lisp
+     (global-set-key (kbd "C-x g") 'magit-status)
+   #+END_SRC
+
+   Command popup from non-magit buffers:
+   #+BEGIN_SRC emacs-lisp
+     (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
+   #+END_SRC
 
