@@ -273,6 +273,19 @@
     #+BEGIN_SRC emacs-lisp
       (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
     #+END_SRC
+* C++ editing
+** Completion
+   Make sure company-irony is installed
+   #+BEGIN_SRC emacs-lisp
+     (use-package company-irony
+       :ensure t)
+   #+END_SRC
+
+   Add it to company's list of backends:
+   #+BEGIN_SRC emacs-lisp
+     (eval-after-load 'company
+       '(add-to-list 'company-backends 'company-irony))
+   #+END_SRC
 
 * Cosmetics
 ** Theme
