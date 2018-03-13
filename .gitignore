@@ -2,6 +2,9 @@
 *~
 auto-save-list/
 
+# irony-folder
+irony/
+
 # Session files
 session.*
 
