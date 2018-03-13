@@ -248,7 +248,6 @@
     #+END_SRC
 
 ** Spell-and syntax checking
-
 *** flycheck
     This package does on the fly syntax checking for MANY programming
     languages. It uses external tools like gcc for C/C++ and
