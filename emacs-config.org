@@ -283,9 +283,9 @@
    And eldoc for argument lists:
    #+BEGIN_SRC emacs-lisp
      (use-package irony-eldoc
-       :config
-       (progn
-         (add-hook 'irony-mode-hook 'irony-eldoc)))
+       :ensure t)
+
+     (add-hook 'irony-mode-hook #'irony-eldoc)
    #+END_SRC
 
 * Cosmetics
