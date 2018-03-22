@@ -1,6 +1,7 @@
 
 #+STARTUP: overview
 * Fix the interface
+
 ** Removing startup message and cleaning top of window
    #+BEGIN_SRC emacs-lisp
      (setq inhibit-startup-screen t)
@@ -347,6 +348,13 @@
      (setq org-babel-python-command "python3")
    #+END_SRC
 
+** Saving links
+   Keybinding needed for linking to points in other buffers.
+
+   #+BEGIN_SRC emacs-lisp
+     (global-set-key (kbd "C-c l") 'org-store-link)
+   #+END_SRC
+
 * GIT integration
 ** Magit
 
@@ -365,4 +373,10 @@
    #+BEGIN_SRC emacs-lisp
      (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
    #+END_SRC
+* Setting initial frame size
+  This has to go last, since some of the settings above seems to change this..
+
+  #+BEGIN_SRC emacs-lisp
+    (set-frame-size (selected-frame) 42 22)
+  #+END_SRC
 
