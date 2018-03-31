@@ -274,6 +274,29 @@
      (setq tab-width 4)
    #+END_SRC
 
+** Put backup files where they belong!
+   Put the files in a separate folder
+   #+BEGIN_SRC emacs-lisp
+     (setq backup-directory-alist `(("." . "~/.saves")))
+   #+END_SRC
+
+   Back up by copying (may be slow)
+   #+BEGIN_SRC emacs-lisp
+     (setq backup-by-copying t)
+   #+END_SRC
+
+   Have a look at the Emacs documentation for these variables (with C-h v).
+   #+BEGIN_SRC emacs-lisp
+     (setq delete-old-versions t
+       kept-new-versions 6
+       kept-old-versions 2
+       version-control t)
+   #+END_SRC
+
+   If I get tired of backups in the future, I can do:
+
+   ~(setq make-backup-files nil)~
+
 * Python editing
 ** Execution from within emacs
    This sets the version of python to use for the keybinding C-c C-c:
