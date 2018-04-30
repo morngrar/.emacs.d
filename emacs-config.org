@@ -213,6 +213,23 @@
        )
    #+END_SRC
 
+** Indentation
+   Defining custom mode-hook to make indentation be 4 spaces wide, and keep
+   curly braces at relative level 0.
+   #+BEGIN_SRC emacs-lisp
+     (defun morngrar-c-mode-hook ()
+       (c-set-offset 'defun-block-intro ++)     ; normal functions indentation
+       (c-set-offset 'substatement-open 0)      ; nested for-loop curly brackets
+       (c-set-offset 'statement-block-intro ++) ; for-loop indentation
+       (c-set-offset 'statement-case-intro ++)  ; switch-case indentation to 4
+       )
+   #+END_SRC
+
+   Adding hook to c-modes:
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'c-mode-hook 'morngrar-c-mode-hook)
+   #+END_SRC
+
 * General editing
 ** Auto-completion
 *** Company
