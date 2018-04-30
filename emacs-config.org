@@ -1,6 +1,7 @@
 
 #+STARTUP: overview
 * Fix the interface
+
 ** Removing startup message and cleaning top of window
    #+BEGIN_SRC emacs-lisp
      (setq inhibit-startup-screen t)
@@ -11,10 +12,21 @@
          (menu-bar-mode -1)
        )
    #+END_SRC
-
 ** Tweaking general keybindings
    Only stuff related to the interface goes here, not tied up to
    specific modes or packages.
+
+*** Shell integration
+
+    Interactive shell command - may be limited
+    #+BEGIN_SRC emacs-lisp
+      (global-set-key (kbd "M-s") 'shell)
+    #+END_SRC
+
+    Spawn full bash in the buffer (no limitations):
+    #+BEGIN_SRC emacs-lisp
+      (global-set-key (kbd "C-M-s") 'term)
+    #+END_SRC
 
 *** 'y or n' prompts
     Don't ask for whole words, only the letter.
@@ -50,6 +62,26 @@
      (set-face-background hl-line-face "#d2dff6")
    #+END_SRC
 
+** Vertical ruler
+   Adds a marker at column 80 in programming buffers:
+   #+BEGIN_SRC emacs-lisp
+     (defun prog-mode-header-line ()
+       "Setup the `header-line-format' on for buffers."
+       (setq header-line-format
+             (list " " (make-string 79 ?-) "|")))
+
+     (add-hook 'prog-mode-hook #'prog-mode-header-line)
+   #+END_SRC
+
+   Highlight when past column 80.
+   (*NOTE* For this you need to install the package 'emacs-goodies-el' from terminal)
+   #+BEGIN_SRC emacs-lisp
+     (setq-default fill-column 80)
+     (add-hook 'prog-mode-hook 'highlight-beyond-fill-column)
+     (custom-set-faces '(highlight-beyond-fill-column-face
+                         ((t (:foreground "red" )))))
+   #+END_SRC
+
 ** Tweaking edges
    Removing fringes:
    #+BEGIN_SRC emacs-lisp
@@ -75,7 +107,7 @@
            '(face trailing tabs indentation::space tab-mark)
            )
      (global-whitespace-mode)
-     (diminish 'global-whitespace-mode) ;; not exactly sure what this does..
+     ;(diminish 'global-whitespace-mode) ;; not exactly sure what this does..
    #+END_SRC
 
 * Packages for trying new things
@@ -153,21 +185,81 @@
          (setq ivy-use-virtual-buffers t)
          (setq enable-recursive-minibuffers t) ))
    #+END_SRC
+* C++ editing
+** Completion
+   *NOTE* The following will make it so that you'll have to install ~cmake~ and
+   ~cmake-devel~ (fedora) on your system, and run ~M-x irony-install-server~ for
+   things to work.
+
+   Use Irony-mode standalone:
+   #+BEGIN_SRC emacs-lisp
+     (use-package irony
+       :ensure t
+       :defer t
+       :init
+       (add-hook 'c++-mode-hook 'irony-mode)
+       (add-hook 'c-mode-hook 'irony-mode)
+       (add-hook 'objc-mode-hook 'irony-mode)
+       :config
+       ;; replace the `completion-at-point' and `complete-symbol' bindings in
+       ;; irony-mode's buffers by irony-mode's function
+       (defun my-irony-mode-hook ()
+         (define-key irony-mode-map [remap completion-at-point]
+           'irony-completion-at-point-async)
+         (define-key irony-mode-map [remap complete-symbol]
+           'irony-completion-at-point-async))
+       (add-hook 'irony-mode-hook 'my-irony-mode-hook)
+       (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+       )
+   #+END_SRC
+
+** Indentation
+   Defining custom mode-hook to make indentation be 4 spaces wide, and keep
+   curly braces at relative level 0.
+   #+BEGIN_SRC emacs-lisp
+     (defun morngrar-c-mode-hook ()
+       (c-set-offset 'defun-block-intro '++)     ; normal functions indentation
+       (c-set-offset 'substatement-open '0)      ; nested for-loop curly brackets
+       (c-set-offset 'statement-block-intro '++) ; for-loop indentation
+       (c-set-offset 'statement-case-intro '++)  ; switch-case indentation to 4
+       )
+   #+END_SRC
+
+   Adding hook to C-like languages:
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'c-mode-common-hook 'morngrar-c-mode-hook)
+   #+END_SRC
+
+   If this needs to be changed in the future to be different for different
+   languages; one can add separate hooks to them like ~c-mode-hook~ for C files,
+   ~c++-mode-hook~ for C++ files, ~java-mode-hook~ for java files, etc.
 
 * General editing
 ** Auto-completion
-   Later this will probably be extended, but for now, the package
-   auto-complete is basically it.
+*** Company
 
-*** auto-complete
+    Main completion engine. For C/C++ one needs to also install ~global~ outside
+    emacs. In C/C++ project folder, one has to run the ~gtags~ command from time
+    to time. This way, two completion engines are working in parallell.
+
+    [[http://cachestocaches.com/2015/8/c-completion-emacs/][Read more here]]
+
     #+BEGIN_SRC emacs-lisp
-      (use-package auto-complete
+      (use-package company
         :ensure t
-        :init
-        (progn
-          (ac-config-default)
-          (global-auto-complete-mode t)
-          ))
+        :defer t
+        :init (add-hook 'after-init-hook 'global-company-mode)
+        :config
+        (use-package company-irony :ensure t :defer t)
+        (setq company-idle-delay              nil
+              company-minimum-prefix-length   2
+              company-show-numbers            t
+              company-tooltip-limit           20
+              company-dabbrev-downcase        nil
+              company-backends                '((company-irony company-gtags))
+              )
+        :bind ("C-;" . company-complete-common)
+        )
     #+END_SRC
 
 *** electric-pair-mode
@@ -178,7 +270,6 @@
     #+END_SRC
 
 ** Spell-and syntax checking
-
 *** flycheck
     This package does on the fly syntax checking for MANY programming
     languages. It uses external tools like gcc for C/C++ and
@@ -204,24 +295,58 @@
      (setq tab-width 4)
    #+END_SRC
 
+** Put backup files where they belong!
+   Put the files in a separate folder
+   #+BEGIN_SRC emacs-lisp
+     (setq backup-directory-alist `(("." . "~/.saves")))
+   #+END_SRC
+
+   Back up by copying (may be slow)
+   #+BEGIN_SRC emacs-lisp
+     (setq backup-by-copying t)
+   #+END_SRC
+
+   Have a look at the Emacs documentation for these variables (with C-h v).
+   #+BEGIN_SRC emacs-lisp
+     (setq delete-old-versions t
+       kept-new-versions 6
+       kept-old-versions 2
+       version-control t)
+   #+END_SRC
+
+   If I get tired of backups in the future, I can do:
+
+   ~(setq make-backup-files nil)~
+
 * Python editing
 ** Execution from within emacs
    This sets the version of python to use for the keybinding C-c C-c:
    #+BEGIN_SRC emacs-lisp
      (setq python-python-command "python3")
      (setq python-shell-interpreter "python3")
+     (setq py-python-command "/usr/bin/python3")
    #+END_SRC
 
    The shell is opened with C-c C-z.
 
 ** Completion
-*** jedi
+
+   Make sure company-anaconda are installed:
     #+BEGIN_SRC emacs-lisp
-      (use-package jedi
-        :ensure t
-        :init
-        (add-hook 'python-mode-hook 'jedi:setup)
-        (add-hook 'python-mode-hook 'jedi:ac-setup))
+      (use-package company-anaconda
+        :ensure t)
+    #+END_SRC
+
+    ...and use the anaconda backend for python.
+    #+BEGIN_SRC emacs-lisp
+      (eval-after-load 'company
+        '(add-to-list 'company-backends 'company-anaconda))
+      (add-hook 'python-mode-hook 'anaconda-mode)
+    #+END_SRC
+
+    And eldoc-mode to get argument lists:
+    #+BEGIN_SRC emacs-lisp
+      (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
     #+END_SRC
 
 * Cosmetics
@@ -232,17 +357,20 @@
    M-x command.
 
    #+BEGIN_SRC emacs-lisp
-     ;(use-package zenburn-theme 
-     ;  :ensure t 
-     ;  :config 
-     ;  (load-theme 'zenburn t)
-     ;  )
-
-     (use-package color-theme
+     (use-package zenburn-theme
        :ensure t
        :config
-       (load-theme 'tango)
+       (load-theme 'zenburn t)
        )
+
+;     (use-package color-theme
+;       :ensure t
+;       :config
+;       (load-theme 'tango-plus t)
+;       )
+
+;     (load-theme 'tango-plus t)
+
    #+END_SRC
 
 ** Org-mode bullets
@@ -264,6 +392,35 @@
      (setq org-babel-python-command "python3")
    #+END_SRC
 
+** Saving links
+   Keybinding needed for linking to points in other buffers.
 
+   #+BEGIN_SRC emacs-lisp
+     (global-set-key (kbd "C-c l") 'org-store-link)
+   #+END_SRC
 
+* GIT integration
+** Magit
+
+   Make sure magit is installed:
+   #+BEGIN_SRC emacs-lisp
+     (use-package magit
+       :ensure t)
+   #+END_SRC
+
+   This binds magit-status to C-x g
+   #+BEGIN_SRC emacs-lisp
+     (global-set-key (kbd "C-x g") 'magit-status)
+   #+END_SRC
+
+   Command popup from non-magit buffers:
+   #+BEGIN_SRC emacs-lisp
+     (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
+   #+END_SRC
+* Setting initial frame size
+  This has to go last, since some of the settings above seems to change this..
+
+  #+BEGIN_SRC emacs-lisp
+    (set-frame-size (selected-frame) 42 22)
+  #+END_SRC
 

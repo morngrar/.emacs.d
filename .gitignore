@@ -2,8 +2,15 @@
 *~
 auto-save-list/
 
+# irony-folder
+irony/
+
+# Session files
+session.*
+
 # Ignore downloaded packages. Emacs downloads them from init.el
 elpa/
+anaconda-mode/
 
 # Ignore testing folder
 testing/
