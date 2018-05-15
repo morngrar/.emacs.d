@@ -417,6 +417,7 @@
    #+BEGIN_SRC emacs-lisp
      (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
    #+END_SRC
+
 * Setting initial frame size
   This has to go last, since some of the settings above seems to change this..
 
