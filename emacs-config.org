@@ -227,7 +227,6 @@
        (c-set-offset 'arglist-close '0)          ; several lines
 
        (c-set-offset 'substatement '++)          ; Bracketless if-statements
-       (c-set-offset 'topmost-intro '+)          ; .hpp file class block indentation
        )
    #+END_SRC
 
