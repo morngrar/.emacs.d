@@ -2,6 +2,9 @@
 *~
 auto-save-list/
 
+#projectile stuff
+*.eld
+
 # irony-folder
 irony/
 
