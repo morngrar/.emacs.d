@@ -5,10 +5,9 @@ The following packages have to be installed from the command-line package manage
 
 - ~emacs-goodies-el~
 - ~cmake~
-- ~cmake-devel~ (fedora, other distros will have their own name for this)
 - ~global~ (see [[*Company][this section]] for how it is  used with C++ completion)
 - ~pylint~ *NOTE* This should be installed with pip: ~pip3 install --user pylint~
-- ~g++~
+- ~gcc~
 
 * Fix the interface
 
