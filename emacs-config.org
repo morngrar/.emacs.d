@@ -9,7 +9,8 @@ The following packages have to be installed from the command-line package manage
 - ~pylint~ *NOTE* This should be installed with pip: ~pip3 install --user pylint~
 - ~gcc~
 - ~npm~
-- ~tern~ *NOTE* this should be installed through npm: ~sudo npm install -g tern~ 
+- ~tern~ *NOTE* this should be installed through npm: ~sudo npm install -g tern~
+- ~ag~ *NOTE* on modern fedora one installs this with ~dnf install the_silver_searcher~
 
 * Fix the interface
 
@@ -415,6 +416,9 @@ A package for cross-referencing:
      (add-hook 'xref-backend-functions #'xref-js2-backend nil t)))
 
 #+END_SRC
+
+*NOTE* this thing uses [[https://github.com/ggreer/the_silver_searcher][ag]] as a backend, so this must be installed on the system. On modern fedora, this is done with ~dnf install the_silver_searcher~ (yeah, pretty intuitive...)
+
 ** Completion
 *NOTE* For the following configuration to work, one has to manually install ~npm~ and do ~sudo npm install -g tern~ first. 
 
