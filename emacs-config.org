@@ -11,9 +11,12 @@ The following packages have to be installed from the command-line package manage
 - ~npm~
 - ~tern~ *NOTE* this should be installed through npm: ~sudo npm install -g tern~
 - ~ag~ *NOTE* on modern fedora one installs this with ~dnf install the_silver_searcher~
+- ~calendar-norway.el~ *NOTE* this needs some special attention, see [[*calendar-norway.el][this]] section, below.
+
+** calendar-norway.el
+Create the ~lisp~ directory in your ~.emacs.d~ directory, and in that directory clone [[https://github.com/unhammer/calendar-norway.el][this]] repository. The configuration itself is handled in the [[*Calendar weeks start with mondays, not sundays!][Calendar]] section below, under [[*Fix the interface][Fix the interface]].
 
 * Fix the interface
-
 ** Removing startup message and cleaning top of window
    #+BEGIN_SRC emacs-lisp
      (setq inhibit-startup-screen t)
@@ -121,6 +124,32 @@ The following packages have to be installed from the command-line package manage
      (global-whitespace-mode)
      ;(diminish 'global-whitespace-mode) ;; not exactly sure what this does..
    #+END_SRC
+
+** Calendar weeks start with mondays, not sundays!
+Add calendar package to load-path
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'load-path "~/.emacs.d/lisp/calendar-norway.el")
+#+END_SRC
+
+Config rudely copy-pasted from the github readme:
+#+BEGIN_SRC emacs-lisp
+  ;; Localises date format, weekdays, months, lunar/solar names:
+  (require 'calendar-norway)
+  ;; Set what holidays you want in your calendar:
+  (setq calendar-holidays
+     (append
+      ;; Include days where you don't have to work:
+      calendar-norway-raude-dagar
+      ;; Include other days that people celebrate:
+      calendar-norway-andre-merkedagar
+      ;; Include daylight savings time:
+      calendar-norway-dst
+      ;; And then you can add some non-Norwegian holidays etc. if you like:
+      '((holiday-fixed 3 17 "St. Patricksdag")
+        (holiday-fixed 10 31 "Hallowe'en")
+        (holiday-float 11 4 4 "Thanksgiving")
+        (solar-equinoxes-solstices))))
+#+END_SRC
 
 * Packages for trying new things
 ** Try
