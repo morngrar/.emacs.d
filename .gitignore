@@ -15,6 +15,9 @@ session.*
 elpa/
 anaconda-mode/
 
+# Ignore custom script folder
+lisp/
+
 # Ignore testing folder
 testing/
 
