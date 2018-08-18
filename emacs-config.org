@@ -376,6 +376,16 @@ Config rudely copy-pasted from the github readme:
 
    ~(setq make-backup-files nil)~
 
+** Helm stuff
+Helm can be used instead of swiper, I think, and some of the other navigation-simplifiers I use elsewhere in this config. But I'll use it only for bookmarks, and latex-editing with org-ref; for now.
+#+BEGIN_SRC emacs-lisp
+  (use-package helm
+    :ensure t
+    :config
+    ;(require 'helm-config)
+    (global-set-key (kbd "C-x r b") 'helm-bookmarks))
+#+END_SRC
+
 * Python editing
 ** Execution from within emacs
    This sets the version of python to use for the keybinding C-c C-c:
@@ -557,6 +567,7 @@ Testing custom class..
 
   ))
 #+END_SRC
+
 
 * GIT integration
 ** Magit
