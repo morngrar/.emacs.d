@@ -5,12 +5,13 @@ The following packages have to be installed from the command-line package manage
 
 - ~emacs-goodies-el~
 - ~cmake~
+- ~latexmk~
 - ~global~ (see [[*Company][this section]] for how it is  used with C++ completion)
-- ~pylint~ *NOTE* This should be installed with pip: ~pip3 install --user pylint~
 - ~gcc~
 - ~npm~
-- ~tern~ *NOTE* this should be installed through npm: ~sudo npm install -g tern~
 - ~ag~ *NOTE* on modern fedora one installs this with ~dnf install the_silver_searcher~
+- ~pylint~ *NOTE* This should be installed with pip: ~pip3 install --user pylint~
+- ~tern~ *NOTE* this should be installed through npm: ~sudo npm install -g tern~
 - ~calendar-norway.el~ *NOTE* this needs some special attention, see [[*calendar-norway.el][this]] section, below.
 
 ** calendar-norway.el
@@ -528,7 +529,7 @@ Disable completion keybindings, since xref-js2 handles this:
    #+END_SRC
 
 ** Latex exporting
-Testing custom class..
+A custom class for exporting norwegian latex documents.
 #+BEGIN_SRC emacs-lisp
   ;; Don't really know what this accomplishes, but..
   (unless (boundp 'org-latex-classes)
@@ -568,7 +569,35 @@ Testing custom class..
   ))
 #+END_SRC
 
+*** Bibliographies and citations
+Installing and configuring org-ref
+#+BEGIN_SRC emacs-lisp
+  (use-package org-ref
+    :ensure t)
+  (use-package helm-bibtex
+    :ensure t)
 
+  (setq reftex-default-bibliography
+        '("~/Dropbox/Skole/Programmering/bibliografi/references.bib"))
+  (setq org-ref-bibliography-notes
+        "~/Dropbox/Skole/Programmering/bibliografi/notes.org"
+        org-ref-default-bibliography
+        '("~/Dropbox/Skole/Programmering/bibliografi/references.bib")
+        org-ref-pdf-directory
+        "~/Dropbox/Skole/Programmering/bibliografi/bibtex-pdfs/")
+  (setq bibtex-completion-bibliography
+        "~/Dropbox/Skole/Programmering/bibliografi/references.bib"
+        bibtex-completion-library-path
+        "~/Dropbox/Skole/Programmering/bibliografi/bibtex-pdfs"
+        bibtex-completion-notes-path
+        "~/Dropbox/Skole/Programmering/bibliografi/helm-bibtex-notes")
+  (setq bibtex-completion-pdf-open-function 'org-open-file)
+#+END_SRC
+
+Make sure that the latex export includes a bibliography. *NOTE: this command uses bibtex, if you need biblatex it has to be changed! Also, ~latexmk~ has to be installed with the system package manager.*
+#+BEGIN_SRC emacs-lisp
+  (setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f"))
+#+END_SRC
 * GIT integration
 ** Magit
 
