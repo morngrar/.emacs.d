@@ -5,6 +5,9 @@ auto-save-list/
 #projectile stuff
 *.eld
 
+# emacs bookmarks
+bookmarks
+
 # irony-folder
 irony/
 
