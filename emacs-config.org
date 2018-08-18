@@ -595,6 +595,8 @@ Installing and configuring org-ref
 #+END_SRC
 
 Make sure that the latex export includes a bibliography. *NOTE: this command uses bibtex, if you need biblatex it has to be changed! Also, ~latexmk~ has to be installed with the system package manager.*
+
+Se [[https://mg.readthedocs.io/latexmk.html][the docs for latexmk]] for more info.
 #+BEGIN_SRC emacs-lisp
   (setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f"))
 #+END_SRC
