@@ -517,6 +517,47 @@ Disable completion keybindings, since xref-js2 handles this:
      (global-set-key (kbd "C-c l") 'org-store-link)
    #+END_SRC
 
+** Latex exporting
+Testing custom class..
+#+BEGIN_SRC emacs-lisp
+  ;; Don't really know what this accomplishes, but..
+  (unless (boundp 'org-latex-classes)
+    (setq org-latex-classes nil))
+
+  (add-to-list 'org-latex-classes
+  '("oppgave"
+
+  "\\documentclass[11pt,a4paper,norsk]{article}
+  \\usepackage[norsk]{babel}
+  \\usepackage[a4paper]{geometry}
+  \\usepackage[T1]{fontenc}
+  \\usepackage{libertine}
+
+  \\usepackage[utf8]{inputenc}
+  \\usepackage{datetime}
+  \\usepackage{color,hyperref}
+  \\usepackage{fancyhdr}
+
+  \\usepackage{graphicx}
+  \\usepackage{amsmath}
+  \\usepackage{booktabs}
+  \\usepackage{tabls}
+
+  \\frenchspacing
+
+  [NO-DEFAULT-PACKAGES]
+  [PACKAGES]
+  [EXTRA]"
+
+  ("\\section{%s}" . "\\section*{%s}")
+  ("\\subsection{%s}" . "\\subsection*{%s}")
+  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+  ("\\paragraph{%s}" . "\\paragraph*{%s}")
+  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")
+
+  ))
+#+END_SRC
+
 * GIT integration
 ** Magit
 
