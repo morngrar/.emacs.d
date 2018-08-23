@@ -528,6 +528,16 @@ Disable completion keybindings, since xref-js2 handles this:
      (global-set-key (kbd "C-c l") 'org-store-link)
    #+END_SRC
 
+** Bindings
+Undefined "standard" bindings bound to same or new bindings
+#+BEGIN_SRC emacs-lisp :results silent
+  ;; inactive timestamps (won't show up in agenda)
+  (define-key org-mode-map (kbd "C-.")
+    #'org-time-stamp-inactive)
+  ;(define-key org-mode-map (kbd "C-u C-.")
+  ;  #'org-time-stamp-rounding-minutes-inactive)
+#+END_SRC
+
 ** Latex exporting
 A custom class for exporting norwegian latex documents.
 #+BEGIN_SRC emacs-lisp
@@ -555,6 +565,9 @@ A custom class for exporting norwegian latex documents.
   \\usepackage{tabls}
 
   \\frenchspacing
+
+  \\def\\doubleunderline#1{\\underline{\\underline{#1}}}
+
 
   [NO-DEFAULT-PACKAGES]
   [PACKAGES]
