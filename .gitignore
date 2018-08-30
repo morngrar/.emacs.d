@@ -28,3 +28,4 @@ testing/
 recentf
 ac-comphist.dat
 emacs-config.el
+.mc-lists.el
