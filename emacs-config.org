@@ -5,6 +5,8 @@ The following packages have to be installed from the command-line package manage
 
 - ~emacs-goodies-el~
 - ~cmake~
+- ~clang~
+- ~clang-devel~ (fedora)
 - ~latexmk~
 - ~global~ (see [[*Company][this section]] for how it is  used with C++ completion)
 - ~gcc~
@@ -551,6 +553,7 @@ A custom class for exporting norwegian latex documents.
   "\\documentclass[11pt,a4paper,norsk]{article}
   \\usepackage[norsk]{babel}
   \\usepackage[a4paper]{geometry}
+  \\usepackage{marginnote}
   \\usepackage[T1]{fontenc}
   \\usepackage{libertine}
 
@@ -567,6 +570,7 @@ A custom class for exporting norwegian latex documents.
   \\frenchspacing
 
   \\def\\doubleunderline#1{\\underline{\\underline{#1}}}
+  \\def\\uline#1{\\underline{#1}}
 
 
   [NO-DEFAULT-PACKAGES]
