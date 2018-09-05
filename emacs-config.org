@@ -602,6 +602,18 @@ A custom class for exporting norwegian latex documents.
   ))
 #+END_SRC
 
+Handling latex small caps or other arbitrary markup, using links:
+#+BEGIN_SRC emacs-lisp
+  (org-add-link-type
+   "latex" nil
+   (lambda (path desc format)
+     (cond
+      ((eq format 'html)
+       (format "<span class=\"%s\">%s</span>" path desc))
+      ((eq format 'latex)
+       (format "\\%s{%s}" path desc)))))
+#+END_SRC
+
 *** Bibliographies and citations
 Installing and configuring org-ref
 #+BEGIN_SRC emacs-lisp
