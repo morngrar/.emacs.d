@@ -556,9 +556,18 @@ Undefined "standard" bindings bound to same or new bindings
   ;  #'org-time-stamp-rounding-minutes-inactive)
 #+END_SRC
 
+*** Definition of bindings for org-ref
+#+BEGIN_SRC emacs-lisp
+  (define-key org-mode-map (kbd "<pause>")
+    #'org-ref-insert-ref-link)
+#+END_SRC
+
+#+RESULTS:
+: org-ref-insert-ref-link
+
 ** Latex exporting
 A custom class for exporting norwegian latex documents.
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results silent
   ;; Don't really know what this accomplishes, but..
   (unless (boundp 'org-latex-classes)
     (setq org-latex-classes nil))
@@ -579,7 +588,11 @@ A custom class for exporting norwegian latex documents.
   \\usepackage{fancyhdr}
 
   \\usepackage{graphicx}
+  \\usepackage{mathtools}
+  \\usepackage{braket} % for sets and like in equations. Defines \\set{}
   \\usepackage{amsmath}
+  \\usepackage{amssymb}
+  \\usepackage{amsfonts}
   \\usepackage{booktabs}
   \\usepackage{tabls}
 
@@ -587,7 +600,12 @@ A custom class for exporting norwegian latex documents.
 
   \\def\\doubleunderline#1{\\underline{\\underline{#1}}}
   \\def\\uline#1{\\underline{#1}}
+  \\def\\duline#1{\\uline{\\uline{#1}}}
 
+  \\newcommand*{\\Z}{\\mathbb{Z}}
+  \\newcommand*{\\R}{\\mathbb{R}}
+  \\newcommand*{\\N}{\\mathbb{N}}
+  \\newcommand*{\\Q}{\\mathbb{Q}}
 
   [NO-DEFAULT-PACKAGES]
   [PACKAGES]
@@ -670,4 +688,3 @@ Se [[https://mg.readthedocs.io/latexmk.html][the docs for latexmk]] for more inf
   #+BEGIN_SRC emacs-lisp
     (set-frame-size (selected-frame) 81 40)
   #+END_SRC
-
