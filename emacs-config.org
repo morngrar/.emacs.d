@@ -271,6 +271,7 @@ Config rudely copy-pasted from the github readme:
        (c-set-offset 'arglist-close '0)          ; several lines
 
        (c-set-offset 'substatement '++)          ; Bracketless if-statements
+       (c-set-offset 'statement-cont '++)        ; Same
        )
    #+END_SRC
 
