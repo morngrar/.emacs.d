@@ -1,4 +1,4 @@
-
+﻿
 #+STARTUP: overview
 * Introduction
 The following packages have to be installed from the command-line package manager:
@@ -91,14 +91,6 @@ Create the ~lisp~ directory in your ~.emacs.d~ directory, and in that directory 
      (add-hook 'prog-mode-hook #'prog-mode-header-line)
    #+END_SRC
 
-   Highlight when past column 80.
-   (*NOTE* For this you need to install the package 'emacs-goodies-el' from terminal)
-   #+BEGIN_SRC emacs-lisp
-     (setq-default fill-column 80)
-     (add-hook 'prog-mode-hook 'highlight-beyond-fill-column)
-     (custom-set-faces '(highlight-beyond-fill-column-face
-                         ((t (:foreground "red" )))))
-   #+END_SRC
 
 ** Tweaking edges
    Removing fringes:
@@ -401,8 +393,8 @@ Helm can be used instead of swiper, I think, and some of the other navigation-si
   (global-set-key (kbd "M-3") #'mc/mark-next-like-this)
   (global-set-key (kbd "M-4") #'mc/mark-previous-like-this)
 
-  (global-set-key (kbd "M-#") #'mc/unmark-next-like-this)
-  (global-set-key (kbd "M-¤") #'mc/unmark-previous-like-this)
+  (global-set-key (kbd "M-2") #'mc/unmark-next-like-this)
+  (global-set-key (kbd "M-5") #'mc/unmark-previous-like-this)
 
 #+END_SRC
 
