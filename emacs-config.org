@@ -679,5 +679,5 @@ Se [[https://mg.readthedocs.io/latexmk.html][the docs for latexmk]] for more inf
   This has to go last, since some of the settings above seems to change this..
 
   #+BEGIN_SRC emacs-lisp
-    (set-frame-size (selected-frame) 42 22)
+    (set-frame-size (selected-frame) 81 45)
   #+END_SRC
