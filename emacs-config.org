@@ -572,7 +572,7 @@ A custom class for exporting norwegian latex documents.
   ;; Don't really know what this accomplishes, but..
   (unless (boundp 'org-latex-classes)
     (setq org-latex-classes nil))
-
+  (setq org-latex-toc-command "\\tableofcontents \\clearpage")
   (add-to-list 'org-latex-classes
   '("oppgave"
 
