@@ -563,9 +563,6 @@ Undefined "standard" bindings bound to same or new bindings
     #'org-ref-insert-ref-link)
 #+END_SRC
 
-#+RESULTS:
-: org-ref-insert-ref-link
-
 ** Latex exporting
 A custom class for exporting norwegian latex documents.
 #+BEGIN_SRC emacs-lisp :results silent
