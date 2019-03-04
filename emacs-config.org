@@ -272,6 +272,8 @@ Config rudely copy-pasted from the github readme:
 
        (c-set-offset 'substatement '++)          ; Bracketless if-statements
        (c-set-offset 'statement-cont '++)        ; Same
+
+       (c-set-offset 'brace-list-intro '++)      ; list instantiation
        )
    #+END_SRC
 
