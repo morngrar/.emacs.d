@@ -260,20 +260,21 @@ Config rudely copy-pasted from the github readme:
 ** Indentation
    Defining custom mode-hook to make indentation be 4 spaces wide, and keep
    curly braces at relative level 0.
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :results silent
      (defun morngrar-c-mode-hook ()
-       (c-set-offset 'defun-block-intro '++)     ; normal functions indentation
+       (setq c-basic-offset 4)                   ; Set C standard offset to 4 spaces
+       (c-set-offset 'defun-block-intro '+)     ; normal functions indentation
        (c-set-offset 'substatement-open '0)      ; nested for-loop curly brackets
-       (c-set-offset 'statement-block-intro '++) ; for-loop indentation
-       (c-set-offset 'statement-case-intro '++)  ; switch-case indentation to 4
+       (c-set-offset 'statement-block-intro '+) ; for-loop indentation
+       (c-set-offset 'statement-case-intro '+)  ; switch-case indentation to 4
 
-       (c-set-offset 'arglist-intro '++)         ; for splitting argument lists over
+       (c-set-offset 'arglist-intro '+)         ; for splitting argument lists over
        (c-set-offset 'arglist-close '0)          ; several lines
 
-       (c-set-offset 'substatement '++)          ; Bracketless if-statements
-       (c-set-offset 'statement-cont '++)        ; Same
+       (c-set-offset 'substatement '+)          ; Bracketless if-statements
+       (c-set-offset 'statement-cont '+)        ; Same
 
-       (c-set-offset 'brace-list-intro '++)      ; list instantiation
+       (c-set-offset 'brace-list-intro '+)      ; list instantiation
        )
    #+END_SRC
 
