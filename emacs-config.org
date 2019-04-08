@@ -286,7 +286,7 @@ Config rudely copy-pasted from the github readme:
    If this needs to be changed in the future to be different for different
    languages; one can add separate hooks to them like ~c-mode-hook~ for C files,
    ~c++-mode-hook~ for C++ files, ~java-mode-hook~ for java files, etc.
-
+   
 ** Project navigation
    Making sure projectile is installed
    #+BEGIN_SRC emacs-lisp
@@ -299,6 +299,15 @@ Config rudely copy-pasted from the github readme:
      (add-hook 'c-mode-common-hook 'projectile-mode)
    #+END_SRC
 
+* Rust editing
+Legger inn rust-mode på .rs filer
+
+#+BEGIN_SRC emacs-lisp :results silent
+  (use-package rust-mode
+    :ensure t)
+
+  (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
+#+END_SRC
 * General editing
 ** Auto-completion
 *** Company
