@@ -549,6 +549,17 @@ Undefined "standard" bindings bound to same or new bindings
   ;  #'org-time-stamp-rounding-minutes-inactive)
 #+END_SRC
 
+Capturing
+#+BEGIN_SRC emacs-lisp
+  (setq org-default-notes-file (concat org-directory "\\todo.org"))
+  (define-key global-map (kbd "C-c c") 'org-capture)
+#+END_SRC
+
+Show agendas
+#+BEGIN_SRC emacs-lisp :results silent
+  (define-key global-map (kbd "C-c a") 'org-agenda)
+#+END_SRC
+
 *** Definition of bindings for org-ref
 #+BEGIN_SRC emacs-lisp
   (define-key org-mode-map (kbd "<pause>")
@@ -656,6 +667,24 @@ Se [[https://mg.readthedocs.io/latexmk.html][the docs for latexmk]] for more inf
 #+BEGIN_SRC emacs-lisp
   (setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f"))
 #+END_SRC
+
+** Todo-items
+*** Closed time stamp
+#+BEGIN_SRC emacs-lisp :results silent
+  (setq org-log-done 'time)
+#+END_SRC
+*** Agenda
+#+BEGIN_SRC emacs-lisp
+  (setq org-agenda-files (list "~/org/todo.org"
+                               "C:\\Users\\svebjo\\Documents\\dagens.org"
+                               "C:\\Users\\svebjo\\Documents\\jobber.org"
+                               "C:\\Users\\svebjo\\Documents\\notater.org"
+                               ))
+#+END_SRC
+
+#+RESULTS:
+| ~/org/todo.org | C:\Users\svebjo\Documents\dagens.org | C:\Users\svebjo\Documents\jobber.org | C:\Users\svebjo\Documents\notater.org |
+
 * GIT integration
 ** Magit
 
