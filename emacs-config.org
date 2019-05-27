@@ -572,7 +572,7 @@ Undefined "standard" bindings bound to same or new bindings
 *** Bindings pertaining to the agenda view
   Capturing tasks globally
   #+BEGIN_SRC emacs-lisp
-    (setq org-default-notes-file (concat org-directory "~/org/todo.org"))
+    (setq org-default-notes-file (concat org-directory "/todo.org"))
     (define-key global-map (kbd "C-c c") 'org-capture)
   #+END_SRC
 
@@ -700,6 +700,15 @@ Files to be included in the agenda
                                "~/org/skole.org"
                                ))
 #+END_SRC
+
+Refiling to agenda files
+#+BEGIN_SRC emacs-lisp
+  (setq org-refile-use-outline-path 'file)
+
+  ;; refile as toplevel
+  (setq org-refile-targets '((org-agenda-files :level . 1)))
+#+END_SRC
+
 * GIT integration
 ** Magit
 
