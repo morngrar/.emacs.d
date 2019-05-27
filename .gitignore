@@ -24,8 +24,9 @@ lisp/
 # Ignore testing folder
 testing/
 
-# individual files
+# individual files og folders
 recentf
 ac-comphist.dat
 emacs-config.el
 .mc-lists.el
+transient/
