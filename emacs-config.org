@@ -559,34 +559,6 @@ Disable completion keybindings, since xref-js2 handles this:
      (global-set-key (kbd "C-c l") 'org-store-link)
    #+END_SRC
 
-** Bindings
-Undefined "standard" bindings bound to same or new bindings
-#+BEGIN_SRC emacs-lisp :results silent
-  ;; inactive timestamps (won't show up in agenda)
-  (define-key org-mode-map (kbd "C-.")
-    #'org-time-stamp-inactive)
-  ;(define-key org-mode-map (kbd "C-u C-.")
-  ;  #'org-time-stamp-rounding-minutes-inactive)
-#+END_SRC
-
-*** Bindings pertaining to the agenda view
-  Capturing tasks globally
-  #+BEGIN_SRC emacs-lisp
-    (setq org-default-notes-file (concat org-directory "/todo.org"))
-    (define-key global-map (kbd "C-c c") 'org-capture)
-  #+END_SRC
-
-  Show agendas
-  #+BEGIN_SRC emacs-lisp
-    (define-key global-map (kbd "C-c a") 'org-agenda)
-  #+END_SRC
-
-*** Definition of bindings for org-ref
-#+BEGIN_SRC emacs-lisp
-  (define-key org-mode-map (kbd "<pause>")
-    #'org-ref-insert-ref-link)
-#+END_SRC
-
 ** Latex exporting
 A custom class for exporting norwegian latex documents.
 #+BEGIN_SRC emacs-lisp :results silent
@@ -707,6 +679,34 @@ Refiling to agenda files
 
   ;; refile as toplevel
   (setq org-refile-targets '((org-agenda-files :level . 1)))
+#+END_SRC
+
+** Bindings
+Undefined "standard" bindings bound to same or new bindings
+#+BEGIN_SRC emacs-lisp :results silent
+  ;; inactive timestamps (won't show up in agenda)
+  (define-key org-mode-map (kbd "C-.")
+    #'org-time-stamp-inactive)
+  ;(define-key org-mode-map (kbd "C-u C-.")
+  ;  #'org-time-stamp-rounding-minutes-inactive)
+#+END_SRC
+
+*** Bindings pertaining to the agenda view
+  Capturing tasks globally
+  #+BEGIN_SRC emacs-lisp
+    (setq org-default-notes-file (concat org-directory "/todo.org"))
+    (define-key global-map (kbd "C-c c") 'org-capture)
+  #+END_SRC
+
+  Show agendas
+  #+BEGIN_SRC emacs-lisp
+    (define-key global-map (kbd "C-c a") 'org-agenda)
+  #+END_SRC
+
+*** Definition of bindings for org-ref
+#+BEGIN_SRC emacs-lisp
+  (define-key org-mode-map (kbd "<pause>")
+    #'org-ref-insert-ref-link)
 #+END_SRC
 
 * GIT integration
