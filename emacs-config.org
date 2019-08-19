@@ -666,11 +666,12 @@ Add a closed timestamp to finished todo-items
 
 Files to be included in the agenda
 #+BEGIN_SRC emacs-lisp
-  (setq org-agenda-files (list "~/org/todo.org"
-                               "~/org/jobb.org"
-                               "~/org/personlig.org"
-                               "~/org/skole.org"
-                               ))
+  ;(setq org-agenda-files (list "~/org/todo.org"
+  ;                             "~/org/jobb.org"
+  ;                             "~/org/personlig.org"
+  ;                             "~/org/skole.org"
+  ;                             ))
+  (setq org-agenda-files '("~/org")) ;includes all files in directory
 #+END_SRC
 
 Refiling to agenda files
@@ -679,6 +680,26 @@ Refiling to agenda files
 
   ;; refile as toplevel
   (setq org-refile-targets '((org-agenda-files :level . 1)))
+#+END_SRC
+
+Custom agenda command for all unscheduled todo items
+#+BEGIN_SRC emacs-lisp
+  (setq org-agenda-custom-commands
+        '(("c" . "My Custom Agendas")
+          ("cu" "Unscheduled TODO"
+           ((todo ""
+                  ((org-agenda-overriding-header "\nUnscheduled TODO")
+                   (org-agenda-skip-function
+                    '(org-agenda-skip-entry-if 'scheduled)
+                    )
+                   )
+                  ))
+           nil
+           nil
+           )
+          )
+        )
+
 #+END_SRC
 
 ** Bindings
