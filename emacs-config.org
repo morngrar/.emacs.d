@@ -125,7 +125,7 @@ Create the ~lisp~ directory in your ~.emacs.d~ directory, and in that directory 
            '(face trailing tabs indentation::space tab-mark)
            )
      (global-whitespace-mode)
-     ;(diminish 'global-whitespace-mode) ;; not exactly sure what this does..
+     (diminish 'global-whitespace-mode) ;; not exactly sure what this does..
    #+END_SRC
 
 ** Calendar weeks start with mondays, not sundays!
@@ -229,85 +229,7 @@ Config rudely copy-pasted from the github readme:
          (setq ivy-use-virtual-buffers t)
          (setq enable-recursive-minibuffers t) ))
    #+END_SRC
-* C++ editing
-** Completion
-   *NOTE* The following will make it so that you'll have to install ~cmake~ and
-   ~cmake-devel~ (fedora) on your system, and run ~M-x irony-install-server~ for
-   things to work.
 
-   Use Irony-mode standalone:
-   #+BEGIN_SRC emacs-lisp
-     (use-package irony
-       :ensure t
-       :defer t
-       :init
-       (add-hook 'c++-mode-hook 'irony-mode)
-       (add-hook 'c-mode-hook 'irony-mode)
-       (add-hook 'objc-mode-hook 'irony-mode)
-       :config
-       ;; replace the `completion-at-point' and `complete-symbol' bindings in
-       ;; irony-mode's buffers by irony-mode's function
-       (defun my-irony-mode-hook ()
-         (define-key irony-mode-map [remap completion-at-point]
-           'irony-completion-at-point-async)
-         (define-key irony-mode-map [remap complete-symbol]
-           'irony-completion-at-point-async))
-       (add-hook 'irony-mode-hook 'my-irony-mode-hook)
-       (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-       )
-   #+END_SRC
-
-** Indentation
-   Defining custom mode-hook to make indentation be 4 spaces wide, and keep
-   curly braces at relative level 0.
-   #+BEGIN_SRC emacs-lisp :results silent
-     (defun morngrar-c-mode-hook ()
-       (setq c-basic-offset 4)                   ; Set C standard offset to 4 spaces
-       (c-set-offset 'defun-block-intro '+)     ; normal functions indentation
-       (c-set-offset 'substatement-open '0)      ; nested for-loop curly brackets
-       (c-set-offset 'statement-block-intro '+) ; for-loop indentation
-       (c-set-offset 'statement-case-intro '+)  ; switch-case indentation to 4
-
-       (c-set-offset 'arglist-intro '+)         ; for splitting argument lists over
-       (c-set-offset 'arglist-close '0)          ; several lines
-
-       (c-set-offset 'substatement '+)          ; Bracketless if-statements
-       (c-set-offset 'statement-cont '+)        ; Same
-
-       (c-set-offset 'brace-list-intro '+)      ; list instantiation
-       )
-   #+END_SRC
-
-   Adding hook to C-like languages:
-   #+BEGIN_SRC emacs-lisp
-     (add-hook 'c-mode-common-hook 'morngrar-c-mode-hook)
-   #+END_SRC
-
-   If this needs to be changed in the future to be different for different
-   languages; one can add separate hooks to them like ~c-mode-hook~ for C files,
-   ~c++-mode-hook~ for C++ files, ~java-mode-hook~ for java files, etc.
-   
-** Project navigation
-   Making sure projectile is installed
-   #+BEGIN_SRC emacs-lisp
-     (use-package projectile
-       :ensure t)
-   #+END_SRC
-
-   Adding c-mode hook
-   #+BEGIN_SRC emacs-lisp
-     (add-hook 'c-mode-common-hook 'projectile-mode)
-   #+END_SRC
-
-* Rust editing
-Legger inn rust-mode på .rs filer
-
-#+BEGIN_SRC emacs-lisp :results silent
-  (use-package rust-mode
-    :ensure t)
-
-  (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
-#+END_SRC
 * General editing
 ** Auto-completion
 *** Company
@@ -416,6 +338,107 @@ Helm can be used instead of swiper, I think, and some of the other navigation-si
   (global-set-key (kbd "M-#") #'mc/unmark-next-like-this)
   (global-set-key (kbd "M-¤") #'mc/unmark-previous-like-this)
 
+#+END_SRC
+* C++ editing
+** Completion
+   *NOTE* The following will make it so that you'll have to install ~cmake~ and
+   ~cmake-devel~ (fedora) on your system, and run ~M-x irony-install-server~ for
+   things to work.
+
+   Use Irony-mode standalone:
+   #+BEGIN_SRC emacs-lisp
+     (use-package irony
+       :ensure t
+       :defer t
+       :init
+       (add-hook 'c++-mode-hook 'irony-mode)
+       (add-hook 'c-mode-hook 'irony-mode)
+       (add-hook 'objc-mode-hook 'irony-mode)
+       :config
+       ;; replace the `completion-at-point' and `complete-symbol' bindings in
+       ;; irony-mode's buffers by irony-mode's function
+       (defun my-irony-mode-hook ()
+         (define-key irony-mode-map [remap completion-at-point]
+           'irony-completion-at-point-async)
+         (define-key irony-mode-map [remap complete-symbol]
+           'irony-completion-at-point-async))
+       (add-hook 'irony-mode-hook 'my-irony-mode-hook)
+       (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+       )
+   #+END_SRC
+
+** Indentation
+   Defining custom mode-hook to make indentation be 4 spaces wide, and keep
+   curly braces at relative level 0.
+   #+BEGIN_SRC emacs-lisp :results silent
+     (defun morngrar-c-mode-hook ()
+       (setq c-basic-offset 4)                   ; Set C standard offset to 4 spaces
+       (c-set-offset 'defun-block-intro '+)     ; normal functions indentation
+       (c-set-offset 'substatement-open '0)      ; nested for-loop curly brackets
+       (c-set-offset 'statement-block-intro '+) ; for-loop indentation
+       (c-set-offset 'statement-case-intro '+)  ; switch-case indentation to 4
+
+       (c-set-offset 'arglist-intro '+)         ; for splitting argument lists over
+       (c-set-offset 'arglist-close '0)          ; several lines
+
+       (c-set-offset 'substatement '+)          ; Bracketless if-statements
+       (c-set-offset 'statement-cont '+)        ; Same
+
+       (c-set-offset 'brace-list-intro '+)      ; list instantiation
+       )
+   #+END_SRC
+
+   Adding hook to C-like languages:
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'c-mode-common-hook 'morngrar-c-mode-hook)
+   #+END_SRC
+
+   If this needs to be changed in the future to be different for different
+   languages; one can add separate hooks to them like ~c-mode-hook~ for C files,
+   ~c++-mode-hook~ for C++ files, ~java-mode-hook~ for java files, etc.
+   
+** Project navigation
+   Making sure projectile is installed
+   #+BEGIN_SRC emacs-lisp
+     (use-package projectile
+       :ensure t)
+   #+END_SRC
+
+   Adding c-mode hook
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'c-mode-common-hook 'projectile-mode)
+   #+END_SRC
+
+* Rust editing
+Legger inn rust-mode på .rs filer
+
+#+BEGIN_SRC emacs-lisp :results silent
+  (use-package rust-mode
+    :ensure t)
+
+  (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
+#+END_SRC
+* PHP editing
+#+BEGIN_SRC emacs-lisp
+  (use-package php-mode
+    :ensure t
+    )
+#+END_SRC
+* Go editing
+Making sure go-mode is installed:
+#+BEGIN_SRC emacs-lisp
+  (use-package go-mode
+    :ensure t
+    )
+#+END_SRC
+
+FIXING TABS AND INDENTING!
+#+BEGIN_SRC emacs-lisp
+  (defun fix-go-mode-tabs ()
+    (setq indent-tabs-mode nil)
+    (setq tab-width 4))
+
+  (add-hook 'go-mode-hook 'fix-go-mode-tabs)
 #+END_SRC
 
 * Python editing
