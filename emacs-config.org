@@ -94,10 +94,10 @@ Create the ~lisp~ directory in your ~.emacs.d~ directory, and in that directory 
    Highlight when past column 80.
    (*NOTE* For this you need to install the package 'emacs-goodies-el' from terminal)
    #+BEGIN_SRC emacs-lisp
-     (setq-default fill-column 80)
-     (add-hook 'prog-mode-hook 'highlight-beyond-fill-column)
-     (custom-set-faces '(highlight-beyond-fill-column-face
-                         ((t (:foreground "red" )))))
+     ;; (setq-default fill-column 80)
+     ;; (add-hook 'prog-mode-hook 'highlight-beyond-fill-column)
+     ;; (custom-set-faces '(highlight-beyond-fill-column-face
+     ;;                     ((t (:foreground "red" )))))
    #+END_SRC
 
 ** Tweaking edges
@@ -125,7 +125,7 @@ Create the ~lisp~ directory in your ~.emacs.d~ directory, and in that directory 
            '(face trailing tabs indentation::space tab-mark)
            )
      (global-whitespace-mode)
-     (diminish 'global-whitespace-mode) ;; not exactly sure what this does..
+     ;(diminish 'global-whitespace-mode) ;; not exactly sure what this does..
    #+END_SRC
 
 ** Calendar weeks start with mondays, not sundays!
