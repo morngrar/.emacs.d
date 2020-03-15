@@ -496,6 +496,10 @@ FIXING TABS AND INDENTING!
               (setq-local completion-cycle-threshold t)
               (setq-local ledger-complete-in-steps t)))
 #+END_SRC
+** Calculator
+#+BEGIN_SRC emacs-lisp
+  (setq calc-point-char ",")
+#+END_SRC
 * JavaScript editing
 ** Enhanced editing mode
 #+BEGIN_SRC emacs-lisp
