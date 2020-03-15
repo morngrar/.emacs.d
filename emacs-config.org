@@ -477,6 +477,25 @@ FIXING TABS AND INDENTING!
      (add-hook 'python-mode-hook 'projectile-mode)
    #+END_SRC
 
+* Ledger-cli editing
+** Enabling ledger-mode
+#+BEGIN_SRC emacs-lisp
+  (use-package ledger-mode
+    :ensure t
+    :init
+    (setq ledger-clear-whole-transactions 1)
+
+    :mode "\\.ldg\\'")
+#+END_SRC
+
+** Completion
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'ledger-mode-hook
+            (lambda ()
+              (setq-local tab-always-indent 'complete)
+              (setq-local completion-cycle-threshold t)
+              (setq-local ledger-complete-in-steps t)))
+#+END_SRC
 * JavaScript editing
 ** Enhanced editing mode
 #+BEGIN_SRC emacs-lisp
