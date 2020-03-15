@@ -125,7 +125,7 @@ Create the ~lisp~ directory in your ~.emacs.d~ directory, and in that directory 
            '(face trailing tabs indentation::space tab-mark)
            )
      (global-whitespace-mode)
-     (diminish 'global-whitespace-mode) ;; not exactly sure what this does..
+;     (diminish 'global-whitespace-mode) ;; not exactly sure what this does..
    #+END_SRC
 
 ** Calendar weeks start with mondays, not sundays!
