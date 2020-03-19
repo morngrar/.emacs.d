@@ -5,9 +5,10 @@
 ; Enable package management from MELPA
 (require 'package)
 (setq package-enable-at-startup nil)
+(package-initialize)
 (add-to-list 'package-archives
 	     '("melpa" . "https://melpa.org/packages/"))
-(package-initialize)
+
 
 ; Setup "use-package"
 (unless (package-installed-p 'use-package)
@@ -23,7 +24,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (go-mode php-mode rust-mode company-irony company-anaconda company org-bullets which-key use-package try tango-plus-theme flycheck counsel color-theme ace-window))))
+    (gnu-elpa-keyring-update go-mode php-mode rust-mode company-irony company-anaconda company org-bullets which-key use-package try tango-plus-theme flycheck counsel color-theme ace-window))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -119,13 +119,13 @@ Create the ~lisp~ directory in your ~.emacs.d~ directory, and in that directory 
      (setq-default indicate-empty-lines t)
    #+END_SRC
 
-   Whitespace awareness:
+   Whitespace awareness (commented out because of go code editing):
    #+BEGIN_SRC emacs-lisp
-     (setq whitespace-style
-           '(face trailing tabs indentation::space tab-mark)
-           )
-     (global-whitespace-mode)
-     (diminish 'global-whitespace-mode) ;; not exactly sure what this does..
+     ;(setq whitespace-style
+           ;'(face trailing tabs indentation::space tab-mark)
+           ;)
+     ;(global-whitespace-mode)
+     ;(diminish 'global-whitespace-mode) ;; not exactly sure what this does..
    #+END_SRC
 
 ** Calendar weeks start with mondays, not sundays!
@@ -408,9 +408,19 @@ Helm can be used instead of swiper, I think, and some of the other navigation-si
    #+BEGIN_SRC emacs-lisp
      (add-hook 'c-mode-common-hook 'projectile-mode)
    #+END_SRC
+* Plantuml editing
+Starts plantuml-mode when opening .puml files
+#+BEGIN_SRC emacs-lisp
+  (use-package plantuml-mode
+    :ensure t)
+
+  (add-to-list 'auto-mode-alist '("\\.puml\\'" . plantuml-mode))
+
+  (setq plantuml-default-exec-mode 'executable)
+#+END_SRC
 
 * Rust editing
-Legger inn rust-mode på .rs filer
+Starts rust-mode when opening .rs files
 
 #+BEGIN_SRC emacs-lisp :results silent
   (use-package rust-mode
@@ -432,13 +442,20 @@ Making sure go-mode is installed:
     )
 #+END_SRC
 
-FIXING TABS AND INDENTING!
+I like my tabs 4 wide, at least (Go has \t characters as convention)
 #+BEGIN_SRC emacs-lisp
   (defun fix-go-mode-tabs ()
-    (setq indent-tabs-mode nil)
+    ;(setq indent-tabs-mode nil)    ; go convention is to use tab characters
     (setq tab-width 4))
 
   (add-hook 'go-mode-hook 'fix-go-mode-tabs)
+#+END_SRC
+
+Fixing go-vet errors from flycheck until next version (32)
+#+BEGIN_SRC emacs-lisp
+  (let ((govet (flycheck-checker-get 'go-vet 'command)))
+    (when (equal (cadr govet) "tool")
+      (setf (cdr govet) (cddr govet))))
 #+END_SRC
 
 * Python editing
