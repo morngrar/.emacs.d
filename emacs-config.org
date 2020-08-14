@@ -351,7 +351,22 @@ Helm can be used instead of swiper, I think, and some of the other navigation-si
     (setq evil-shift-round nil)
     (setq evil-want-C-u-scroll t)
     :config ;; tweak evil after loading it
+    (add-to-list 'evil-emacs-state-modes 'ledger-report-mode)
     (evil-mode))
+
+  (evil-set-initial-state 'calendar-mode 'emacs)
+#+END_SRC
+
+Change org-mode calendar navigation to me vim-like (also affects ledger-mode):
+#+BEGIN_SRC emacs-lisp
+  (define-key org-read-date-minibuffer-local-map (kbd "M-h") (lambda () (interactive) (org-eval-in-calendar '(calendar-backward-day 1))))
+  (define-key org-read-date-minibuffer-local-map (kbd "M-l") (lambda () (interactive) (org-eval-in-calendar '(calendar-forward-day 1))))
+  (define-key org-read-date-minibuffer-local-map (kbd "M-k") (lambda () (interactive) (org-eval-in-calendar '(calendar-backward-week 1))))
+  (define-key org-read-date-minibuffer-local-map (kbd "M-j") (lambda () (interactive) (org-eval-in-calendar '(calendar-forward-week 1))))
+  (define-key org-read-date-minibuffer-local-map (kbd "M-H") (lambda () (interactive) (org-eval-in-calendar '(calendar-backward-month 1))))
+  (define-key org-read-date-minibuffer-local-map (kbd "M-L") (lambda () (interactive) (org-eval-in-calendar '(calendar-forward-month 1))))
+  (define-key org-read-date-minibuffer-local-map (kbd "M-K") (lambda () (interactive) (org-eval-in-calendar '(calendar-backward-year 1))))
+  (define-key org-read-date-minibuffer-local-map (kbd "M-J") (lambda () (interactive) (org-eval-in-calendar '(calendar-forward-year 1))))
 #+END_SRC
 * C++ editing
 ** Completion
@@ -491,29 +506,6 @@ FIXING TABS AND INDENTING!
      (add-hook 'python-mode-hook 'projectile-mode)
    #+END_SRC
 
-* Ledger-cli editing
-** Enabling ledger-mode
-#+BEGIN_SRC emacs-lisp
-  (use-package ledger-mode
-    :ensure t
-    :init
-    (setq ledger-clear-whole-transactions 1)
-
-    :mode "\\.ldg\\'")
-#+END_SRC
-
-** Completion
-#+BEGIN_SRC emacs-lisp
-  (add-hook 'ledger-mode-hook
-            (lambda ()
-              (setq-local tab-always-indent 'complete)
-              (setq-local completion-cycle-threshold t)
-              (setq-local ledger-complete-in-steps t)))
-#+END_SRC
-** Calculator
-#+BEGIN_SRC emacs-lisp
-  (setq calc-point-char ",")
-#+END_SRC
 * JavaScript editing
 ** Enhanced editing mode
 #+BEGIN_SRC emacs-lisp
@@ -792,6 +784,29 @@ Undefined "standard" bindings bound to same or new bindings
     #'org-ref-insert-ref-link)
 #+END_SRC
 
+* Ledger-cli editing
+** Enabling ledger-mode
+#+BEGIN_SRC emacs-lisp
+  (use-package ledger-mode
+    :ensure t
+    :init
+    (setq ledger-clear-whole-transactions 1)
+
+    :mode "\\.ldg\\'")
+#+END_SRC
+
+** Completion
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'ledger-mode-hook
+            (lambda ()
+              (setq-local tab-always-indent 'complete)
+              (setq-local completion-cycle-threshold t)
+              (setq-local ledger-complete-in-steps t)))
+#+END_SRC
+** Calculator
+#+BEGIN_SRC emacs-lisp
+  (setq calc-point-char ",")
+#+END_SRC
 * GIT integration
 ** Magit
 
