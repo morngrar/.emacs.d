@@ -70,14 +70,14 @@ Create the ~lisp~ directory in your ~.emacs.d~ directory, and in that directory 
    Highlight current line:
 
    #+BEGIN_SRC emacs-lisp
-     (global-hl-line-mode 1)
+     ;(global-hl-line-mode 1)
    #+END_SRC
 
    Set line-highlighting color to differ from the themes C-<space>
    color:
 
    #+BEGIN_SRC emacs-lisp
-     (set-face-background hl-line-face "#d2dff6")
+     ;(set-face-background hl-line-face "#d2dff6")
    #+END_SRC
 
 ** Vertical ruler
